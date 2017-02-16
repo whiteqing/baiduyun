@@ -1,61 +1,61 @@
 window.onload = function(){
-	sdMenu();
+    sdMenu();
     moreNav();
 
     var data = [
-			{
-				id:0,
-				name:'gg',
-				pid:-1
-			},
-			{
-				id:1,
-				name:'新建文件夹',
-				pid:-1
-			},
-			{
-				id:2,
-				name:'毛毛',
-				pid:0  //表示父文件夹的id为0
-			},
-			{
-				id:3,
-				name:'sdddddd',
-				pid:0  //表示父文件夹的id为0
-			},
-			{
-				id:4,
-				name:'bb',
-				pid:2  //表示父文件夹的id为0
-			}
-    ];
+		{
+			id:0,
+			name:'gg',
+			pid:-1
+		},
+		{
+			id:1,
+			name:'新建文件夹',
+			pid:-1
+		},
+		{
+			id:2,
+			name:'毛毛',
+			pid:0  //表示父文件夹的id为0
+		},
+		{
+			id:3,
+			name:'sdddddd',
+			pid:0  //表示父文件夹的id为0
+		},
+		{
+			id:4,
+			name:'bb',
+			pid:2  //表示父文件夹的id为0
+		}
+    	];
 
     // 默认
     var def = {    	
-    	fname:[],				// 存放是默认名字的文件夹
+    	fname:[],			// 存放是默认名字的文件夹
     	name:'新建文件夹',
     	setName:function(){		// 创建一个文件夹，判断这个文件夹的默认名字是什么
     		if(def.fname.length == 0){
-				return 1;
-			}else{
-				for(var i=0; i<def.fname.length; i++){
-					var num = parseInt(def.fname[i].split(' (')[1].split(')')[0]);
-					if(num != i+1){
-						return i+1;
-					}						
-				}
-				//如果值都对了，说明前面的文件夹都是默认名字
-				return def.fname.length+1;
-			}			
-		},
-		deleteName:function(n){
+			return 1;
+		}else{
 			for(var i=0; i<def.fname.length; i++){
-				if(def.fname[i] == n){
-					def.fname.splice(i,1);
-					// i--;
-				}
+				var num = parseInt(def.fname[i].split(' (')[1].split(')')[0]);
+				if(num != i+1){
+					return i+1;
+				}						
+			}
+			//如果值都对了，说明前面的文件夹都是默认名字
+			return def.fname.length+1;
+		}			
+		},
+	deleteName:function(n){
+		for(var i=0; i<def.fname.length; i++){
+			if(def.fname[i] == n){
+				def.fname.splice(i,1);
+				// i--;
 			}
 		}
+	}
     }
 
     
@@ -74,23 +74,23 @@ window.onload = function(){
     var contextMenu = document.getElementsByClassName('contextMenu');
     var shadow = document.getElementById('shadow');//框选
     var dragCount = document.getElementById('dragCount');
-	var count = document.getElementsByClassName('count')[0];
-	var listSwitch = document.getElementsByClassName('list_switch')[0];
-	var list = listSwitch.getElementsByClassName('list')[0];
-	var thumbnail = listSwitch.getElementsByClassName('thumbnail')[0];
-	var cssSwitch = document.getElementById('cssSwitch');
-	var alters = document.getElementsByClassName('alter');
-	var operation = document.getElementById('operation');
+    var count = document.getElementsByClassName('count')[0];
+    var listSwitch = document.getElementsByClassName('list_switch')[0];
+    var list = listSwitch.getElementsByClassName('list')[0];
+    var thumbnail = listSwitch.getElementsByClassName('thumbnail')[0];
+    var cssSwitch = document.getElementById('cssSwitch');
+    var alters = document.getElementsByClassName('alter');
+    var operation = document.getElementById('operation');
     var pid = -1;//在第一页创建数据，pid为-1
     var isRename = false;//没在重命名
-   	var num = data.length-1;//设置数据id
-   	var href = location.href;
-   	var path = [];//记录跳转路径
-   	var p = '';
-   	var isMenuDelete = false;//不是点击的右键菜单里的删除时，此值为false
-   	var isMenuRename = false;//不是点击的右键菜单里的重命名时，此值为false
-   	var isList = false; //文件夹为列表布局时，此值为true
-   	var parentFile = null;//目标文件夹
+    var num = data.length-1;//设置数据id
+    var href = location.href;
+    var path = [];//记录跳转路径
+    var p = '';
+    var isMenuDelete = false;//不是点击的右键菜单里的删除时，此值为false
+    var isMenuRename = false;//不是点击的右键菜单里的重命名时，此值为false
+    var isList = false; //文件夹为列表布局时，此值为true
+    var parentFile = null;//目标文件夹
    	
    	totalFile.onclick = function(){
    		location.hash = '';
@@ -220,19 +220,6 @@ window.onload = function(){
 			var alter = this.parentNode;
 			// 刚创建的文件夹
 			if(/^\s*$/.test(a.innerHTML)){		
-				// num++;		
-				// a.innerHTML = def.name + ' ('+def.setName()+')';			
-				// // 往data里面插入一条数据
-				// var addData = {};
-				// addData.id = num;
-				// addData.name = a.innerHTML;
-				// addData.pid = pid;
-				// // 给文件夹一个标识，存好id和pid
-				// file.index = num;
-				// file.pid = pid;
-				// data.push(addData);
-				// // 如果是默认的名字，就存一下
-				// saveDefName(a.innerHTML);
 				fileList.removeChild(file); 
 				count.innerHTML = files.length;	
 				isAllChecked();				
@@ -241,8 +228,6 @@ window.onload = function(){
 			a.className = 'file_name active';
 			input.value = a.innerHTML;
 			isRename = false;
-			console.log(def.fname);
-				console.log(data);
 		};
 
 		// 鼠标移入蓝框和选择框出现
@@ -1025,7 +1010,3 @@ window.onload = function(){
 };
 
 	
-
-// https://pan.baidu.com/disk/home#list/path=%2F&vmode=grid
-// https://pan.baidu.com/disk/home#list/vmode=grid&path=%2F慕课网视频
-// https://pan.baidu.com/disk/home#list/vmode=grid&path=%2F慕课网视频%2FHTML5 移动Web App阅读器
